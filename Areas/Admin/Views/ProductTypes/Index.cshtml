@@ -1,0 +1,45 @@
+﻿@*1. Добавляем директиву с казанием модели данных*@
+@model IEnumerable<StoreMVC.Models.ProductType>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (TempData["SM"] != null)
+{
+    <div class="row text-center">
+        <div class="col-12 alert alert-success">
+            @TempData["SM"]
+        </div>
+    </div>
+}
+
+<div class="row mt-2">
+    <div class="col-6">
+        <h2 class="text-info">Product Type List</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info">New Product Type</a>
+    </div>
+</div>
+
+
+<div class="mt-1">
+    <table class="table table-striped border">
+        <thead>
+            <tr class="table-info">
+                <th>@Html.DisplayNameFor(x => x.Name)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>@item.Name</td>
+                <td>EDIT | DETAILS | DELETE</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
