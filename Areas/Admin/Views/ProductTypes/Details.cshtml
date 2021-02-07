@@ -1,0 +1,27 @@
+﻿@model StoreMVC.Models.ProductType
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<h2 class="text-info mt-1">Details of Product Type</h2>
+
+    <div class="p-4 border rounded">
+
+        <div class="row form-group">
+            <div class="col-2">
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Name" class="form-control" disabled />
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <a class="btn btn-primary" asp-route-id="@Model.Id" asp-action="Edit">
+                <i class="fas fa-edit"></i>
+            </a>
+            <a asp-action="Index" class="btn btn-success">Back To List</a>
+        </div>
+
+    </div>

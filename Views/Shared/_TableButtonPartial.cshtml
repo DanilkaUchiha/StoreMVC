@@ -1,0 +1,19 @@
+﻿@model int
+@using System.Web
+
+
+<td style="width: 150px">
+    <div class="btn-group" role="group">
+        <a class="btn btn-primary buttonWidth" href="@HttpUtility.UrlDecode(Url.Action($"Edit/{Model}"))">
+            <i class="fas fa-edit"></i>
+        </a>
+
+        <a class="btn btn-success buttonWidth" href="@HttpUtility.UrlDecode(Url.Action($"Details/{Model}"))">
+            <i class="fas fa-list"></i>
+        </a>
+
+        <a class="btn btn-danger buttonWidth" href="@HttpUtility.UrlDecode(Url.Action($"Delete/{Model}"))">
+            <i class="fas fa-trash-alt"></i>
+        </a>
+    </div>
+</td>

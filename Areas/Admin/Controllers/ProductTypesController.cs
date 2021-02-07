@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 using StoreMVC.Data;
 using StoreMVC.Models;
 
@@ -22,12 +24,97 @@ namespace StoreMVC.Areas.Admin.Controllers
 
         // GET: ProductTypes/Index
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             // Задача - получить и вернуть в представление все типы продуктов в листе
             //var productsFromDb = _db.ProductTypes.ToList();
 
-            return View(_db.ProductTypes.ToList());
+            return View(await _db.ProductTypes.ToListAsync());
+        }
+
+
+        // GET : ProductTypes/Edit
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            ProductType product = await _db.ProductTypes.FindAsync(id);
+
+            if (product == null)
+                return NotFound();
+
+            return View(product);
+        }
+
+        // POST: ProductTypes/Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, ProductType productType)
+        {
+            if (id != productType.Id)
+                return NotFound();
+
+            if (!ModelState.IsValid)
+                return View(productType);
+
+            _db.Update(productType);
+            await _db.SaveChangesAsync();
+
+            TempData["SM"] = $"Product Type {productType.Name} was successfully edited!";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET : ProductTypes/Details
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            ProductType product = await _db.ProductTypes.FindAsync(id);
+
+            if (product == null)
+                return NotFound();
+
+            return View(product);
+        }
+
+        // GET : ProductTypes/Delete
+        [HttpGet]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            ProductType product = await _db.ProductTypes.FindAsync(id);
+
+            if (product == null)
+                return NotFound();
+
+            return View(product);
+        }
+
+        // POST: ProductTypes/Create
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeletePost(int? id)
+        {
+            ProductType product = await _db.ProductTypes.FindAsync(id);
+
+            if (product == null)
+            {
+                TempData["SM"] = $"Failed to delete {product.Id} product!";
+                return RedirectToAction(nameof(Index));
+            }
+
+            _db.ProductTypes.Remove(product);
+            await _db.SaveChangesAsync();
+
+            TempData["SM"] = $"Succeed to delete {product.Id} product!";
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ProductTypes/Create
