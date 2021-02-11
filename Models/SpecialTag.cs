@@ -1,6 +1,6 @@
 ﻿namespace StoreMVC.Models
 {
-    public class ProductType : NamedDbItem
+    public class SpecialTag : NamedDbItem
     {
 
     }

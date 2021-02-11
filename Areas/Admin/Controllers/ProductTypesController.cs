@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using StoreMVC.Data;
 using StoreMVC.Models;
@@ -51,18 +47,18 @@ namespace StoreMVC.Areas.Admin.Controllers
         // POST: ProductTypes/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, ProductType productType)
+        public async Task<IActionResult> Edit(int id, ProductType product)
         {
-            if (id != productType.Id)
+            if (id != product.Id)
                 return NotFound();
 
             if (!ModelState.IsValid)
-                return View(productType);
+                return View(product);
 
-            _db.Update(productType);
+            _db.Update(product);
             await _db.SaveChangesAsync();
 
-            TempData["SM"] = $"Product Type {productType.Name} was successfully edited!";
+            TempData["SM"] = $"Product {product.Name} was successfully edited!";
 
             return RedirectToAction(nameof(Index));
         }

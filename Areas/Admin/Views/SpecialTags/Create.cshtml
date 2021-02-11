@@ -1,0 +1,36 @@
+﻿@model StoreMVC.Models.SpecialTag
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h2 class="text-info mt-1">Create a new tag</h2>
+
+<form method="post" asp-action="Create">
+    <div class="p-4 border rounded">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row form-group">
+            <div class="col-2">
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Name" class="form-control" placeholder="Type the name ..." />
+            </div>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" value="Create" />
+            <a asp-action="Index" class="btn btn-success">Back to tags</a>
+        </div>
+
+    </div>
+
+</form>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

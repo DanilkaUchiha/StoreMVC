@@ -1,10 +1,10 @@
-﻿@model StoreMVC.Models.ProductType
+﻿@model StoreMVC.Models.SpecialTag
 @{
     ViewData["Title"] = "Details";
 }
 
 
-<h2 class="text-info mt-1">Details of Product Type</h2>
+<h2 class="text-info mt-1">Details of the tag</h2>
 
 <div class="p-4 border rounded">
 
@@ -21,7 +21,7 @@
         <a class="btn btn-primary" asp-route-id="@Model.Id" asp-action="Edit">
             <i class="fas fa-edit"></i>
         </a>
-        <a asp-action="Index" class="btn btn-success">Back To List</a>
+        <a asp-action="Index" class="btn btn-success">Back to tags</a>
     </div>
 
 </div>

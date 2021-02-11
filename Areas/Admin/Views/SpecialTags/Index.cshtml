@@ -1,0 +1,49 @@
+﻿@model IEnumerable<StoreMVC.Models.SpecialTag>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@if (TempData["SM"] != null)
+{
+    <div class="row text-center">
+        <div class="col-12 alert alert-success">
+            @TempData["SM"]
+        </div>
+    </div>
+}
+
+<div class="row mt-2">
+    <div class="col-6">
+        <h2 class="text-info">Special tag list</h2>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info">
+            <i class="fas fa-plus"></i>
+            New special tag
+        </a>
+    </div>
+</div>
+
+
+<div class="mt-1">
+    <table class="table table-striped border">
+        <thead>
+        <tr class="table-info">
+            <th>@Html.DisplayNameFor(x => x.Name)</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    <partial name="_TableButtonPartial" model="item.Id" />
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+

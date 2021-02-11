@@ -1,0 +1,28 @@
+﻿@model StoreMVC.Models.SpecialTag
+@{
+    ViewData["Title"] = "Delete";
+}
+
+
+<h2 class="text-info mt-1">Delete a special tag</h2>
+<form method="post" asp-action="Delete">
+    <div class="p-4 border rounded">
+
+        <div class="row form-group">
+            <div class="col-2">
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-5">
+                <input asp-for="Name" class="form-control" disabled />
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <button class="btn btn-danger" type="submit" asp-route-id="@Model.Id">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+            <a asp-action="Index" class="btn btn-success">Back to tags </a>
+        </div>
+    </div>
+</form>
+

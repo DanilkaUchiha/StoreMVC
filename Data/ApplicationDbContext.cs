@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using StoreMVC.Models;
 
@@ -15,5 +12,6 @@ namespace StoreMVC.Data
         }
 
         public DbSet<ProductType> ProductTypes { get; set; }
+        public DbSet<SpecialTag> SpecialTags { get; set; }
     }
 }
