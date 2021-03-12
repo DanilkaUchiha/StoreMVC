@@ -1,0 +1,77 @@
+﻿@model StoreMVC.Models.ViewModels.ProductViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2 class="text-info mt-1">Create Product</h2>
+
+    <div class="p-4 rounded border row">
+
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control" asp-for="Product.Name" disabled />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.Price"></label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control" asp-for="Product.Price" disabled />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.ShadeColor"></label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control" asp-for="Product.ShadeColor" disabled />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.Available"></label>
+                </div>
+                <div class="col-8">
+                    <div class="custom-control custom-switch">
+                        <input class="custom-control-input" type="checkbox" asp-for="Product.Available" id="AvailableOrNot" disabled />
+                        <label class="custom-control-label" for="AvailableOrNot">Toggle to make the product available</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.ProductType"></label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control" asp-for="Product.ProductType.Name" disabled />
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Product.SpecialTag"></label>
+                </div>
+                <div class="col-8">
+                    <input class="form-control" asp-for="Product.SpecialTag.Name" disabled />
+                </div>
+            </div>
+        </div>
+
+        @*Создаём новые колонки для вывода изображения*@
+        <div class="col-3 offset-1">
+            @*Ограничиваем 100 от контейнера внешнего*@
+            <img src="@Model.Product.Image" width="100%" style="border: 1px solid #bbb9b9"/>
+        </div>
+
+        <br />
+        <div class="form-group">
+            <a asp-action="Edit" asp-route-id="@Model.Product.Id" class="btn btn-primary" >Edit</a>
+            <a asp-action="Index" class="btn btn-success">Back to products</a>
+        </div>
+    </div>

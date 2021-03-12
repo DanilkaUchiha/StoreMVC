@@ -37,6 +37,16 @@ namespace StoreMVC
 
             // Необходимо добавлять для использования маршрутов MVC на основе областей сайта (Area) а не конечных точек (EndPoints)
             services.AddMvc(option => option.EnableEndpointRouting = false);
+
+            // Внедряем и конфигурируем завиысшьщсть сессии и куки
+            services.AddSession(option =>
+            {
+                // Устанавливаем время ожидания (бездействия) сессии
+                option.IdleTimeout = TimeSpan.FromMinutes(30);
+
+                // Активируем куки
+                option.Cookie.HttpOnly = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +55,7 @@ namespace StoreMVC
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                app.UseDatabaseErrorPage(); // old method
             }
             else
             {
@@ -60,6 +70,8 @@ namespace StoreMVC
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();// после первых двух методоов перед ним
 
             //app.UseEndpoints(endpoints =>
             //{

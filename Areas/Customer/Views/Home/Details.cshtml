@@ -1,0 +1,91 @@
+﻿@model StoreMVC.Models.Product
+@using Microsoft.AspNetCore.Http
+@using StoreMVC.Extensions
+@using StoreMVC.Utility
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    ViewData["Title"] = @Model.Name;
+}
+
+<h1 class="text-info">Product details</h1>
+
+<form method="post">
+    @*<input type="hidden" asp-for="Id"/>*@
+    <div class="row rounded border p-4">
+        <div class="col-8">
+            <div class="row mb-3 form-group">
+                <div class="col-4">
+                    <label asp-for="Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Name" class="form-control" disabled/>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label asp-for="ShadeColor"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="ShadeColor" class="form-control" disabled/>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label asp-for="Price"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Price" class="form-control" disabled/>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label asp-for="ProductType"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="ProductType.Name" class="form-control" disabled/>
+                </div>
+            </div>
+            @if (Model.SpecialTag.Name != "-NONE-")
+            {
+                <div class="row mb-3">
+                    <div class="col-4">
+                        <label asp-for="SpecialTag"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="SpecialTag.Name" class="form-control" disabled/>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <div class="col-8 offset-4">
+                    @{
+                        var productsInCart = HttpContextAccessor.HttpContext.Session.Get<List<int>>(SessionKey.ShoppingCart);
+                        if (!(productsInCart is not null && productsInCart.Contains(Model.Id)))
+                        {
+                            <button type="submit" asp-route-id="@Model.Id" class="d-flex justify-content-center btn btn-primary">Add to cart</button>
+                        }
+                        else
+                        {
+                            <button type="submit" asp-action="Remove" asp-route-id="@Model.Id" class="d-flex justify-content-center btn btn-danger">Remove from cart</button>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3 offset-1">
+            <img src="@Model.Image" style="border: 1px solid #bbb9b9; border-radius: 5px; width: 100%;" />
+
+            @if (Model.Available)
+            {
+                var path = "\\" + StoreMVC.Utility.SD.ImageFolder + "\\" + StoreMVC.Utility.SD.ProductIsAvailable;
+                <img src="@path" style="border: 1px red" class="img-fluid"/>
+            }
+        </div>
+
+        <br/>
+
+        <a class="btn btn-success" asp-action="Index">Back to list</a>
+    </div>
+</form>

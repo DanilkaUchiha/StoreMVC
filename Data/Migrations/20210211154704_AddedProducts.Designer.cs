@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StoreMVC.Data;
 
 namespace StoreMVC.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210211154704_AddedProducts")]
+    partial class AddedProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,33 +221,6 @@ namespace StoreMVC.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("StoreMVC.Models.Appointment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("AppointmentDay")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CustomerEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerPhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsConfirmed")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Appointments");
-                });
-
             modelBuilder.Entity("StoreMVC.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -300,28 +275,6 @@ namespace StoreMVC.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductTypes");
-                });
-
-            modelBuilder.Entity("StoreMVC.Models.ProductsForAppointment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AppointmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppointmentId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductsForAppointments");
                 });
 
             modelBuilder.Entity("StoreMVC.Models.SpecialTag", b =>
@@ -403,21 +356,6 @@ namespace StoreMVC.Data.Migrations
                     b.HasOne("StoreMVC.Models.SpecialTag", "SpecialTag")
                         .WithMany()
                         .HasForeignKey("SpecialTagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("StoreMVC.Models.ProductsForAppointment", b =>
-                {
-                    b.HasOne("StoreMVC.Models.Appointment", "Appointment")
-                        .WithMany()
-                        .HasForeignKey("AppointmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("StoreMVC.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

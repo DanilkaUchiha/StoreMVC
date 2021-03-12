@@ -43,7 +43,6 @@ namespace StoreMVC.Areas.Admin.Controllers
             TempData["SM"] = $"Tag {tag.Name} was added successfully!";
 
             return RedirectToAction(nameof(Index));
-
         }
 
         //Get SpecialTags/Edit
@@ -71,7 +70,7 @@ namespace StoreMVC.Areas.Admin.Controllers
             if (!ModelState.IsValid)
                 return View(tag);
 
-            _db.SpecialTags.Update(tag); // diff _db.Update(tag) ?
+            _db.Update(tag);
             await _db.SaveChangesAsync();
 
             TempData["SM"] = $"Tag {tag.Name} was successfully edited!";
