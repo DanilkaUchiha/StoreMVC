@@ -50,31 +50,34 @@
                 <div class="col-4">
                     <div class="row">
                         <div class="col-12">
-                            <label>Name :</label>
+                            <label>@Html.DisplayNameFor(x => @Model.Appointment.CustomerName) :</label>
                         </div>
                         <div class="col-12 pb-3">
                             <input class="form-control" asp-for="@Model.Appointment.CustomerName" />
+                            <span class="text-danger" asp-validation-for="@Model.Appointment.CustomerName"></span>
                         </div>
                         <div class="col-12">
-                            <label>Phone Number :</label>
+                            <label>@Html.DisplayNameFor(x => @Model.Appointment.CustomerPhoneNumber) :</label>
                         </div>
                         <div class="col-12 pb-3">
                             <input class="form-control" asp-for="@Model.Appointment.CustomerPhoneNumber" />
+                            <span class="text-danger" asp-validation-for="@Model.Appointment.CustomerPhoneNumber"></span>
                         </div>
                         <div class="col-12">
-                            <label>Email :</label>
+                            <label>@Html.DisplayNameFor(x => @Model.Appointment.CustomerEmail) :</label>
                         </div>
                         <div class="col-12 pb-3">
                             <input class="form-control" asp-for="@Model.Appointment.CustomerEmail" />
+                            <span class="text-danger" asp-validation-for="@Model.Appointment.CustomerEmail"></span>
                         </div>
                         <div class="col-12">
-                            <label>Appointment day :</label>
+                            <label>@Html.DisplayNameFor(x => @Model.Appointment.AppointmentDay) :</label>
                         </div>
                         <div class="col-12 pb-3">
                             <input type="date" class="form-control" asp-for="@Model.Appointment.AppointmentDay" />
                         </div>
                         <div class="col-12">
-                            <label>Appointment time :</label>
+                            <label>@Html.DisplayNameFor(x => @Model.Appointment.AppointmentTime) :</label>
                         </div>
                         <div class="col-12 pb-3">
                             <input type="time" min="08:00" max="18:00" class="form-control" asp-for="@Model.Appointment.AppointmentTime" />
@@ -95,4 +98,8 @@ else
             No items added to the shopping cart...
         </div>
     </div>
+}
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

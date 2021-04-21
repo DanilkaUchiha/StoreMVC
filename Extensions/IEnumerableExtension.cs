@@ -18,5 +18,19 @@ namespace StoreMVC.Extensions
                        Selected = item.GetPropertyValue("Id").Equals(selectedValue.ToString())
                    };
         }
+
+        public static IEnumerable<SelectListItem> ToSelectListItem<T>(this IEnumerable<T> items, string selectedValue)
+        {
+            if (selectedValue is null)
+                selectedValue = string.Empty;
+
+            return from item in items
+                   select new SelectListItem
+                   {
+                       Text = item.GetPropertyValue("Name"),
+                       Value = item.GetPropertyValue("Id"),
+                       Selected = item.GetPropertyValue("Id").Equals(selectedValue.ToString())
+                   };
+        }
     }
 }

@@ -1,0 +1,62 @@
+﻿@model StoreMVC.Models.ViewModels.AppointmentViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h2 class="text-info">Appointment list</h2>
+
+@if (TempData["SM"] != null)
+{
+    <div class="row text-center">
+        <div class="col-12 alert alert-success">
+            @TempData["SM"]
+        </div>
+    </div>
+}
+
+<form method="get">
+    <div class="row my-3">
+        <div class="col">
+            <input class="form-control" placeholder="Type Name, Email or Phone for search..." name="searchKey" />
+        </div>
+        <div class="col-3">
+            <button class="btn btn-primary form-control" type="submit">Search</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="table-responsive">
+                <table class="table table-striped border">
+                    <thead class="table-info">
+                        <tr>
+                            <th>@Html.DisplayNameFor(x => x.Appointments.FirstOrDefault().SalesPerson.Name)</th>
+                            <th>@Html.DisplayNameFor(x => x.Appointments.FirstOrDefault().AppointmentDay)</th>
+                            <th>@Html.DisplayNameFor(x => x.Appointments.FirstOrDefault().CustomerName)</th>
+                            <th>@Html.DisplayNameFor(x => x.Appointments.FirstOrDefault().CustomerPhoneNumber)</th>
+                            <th>@Html.DisplayNameFor(x => x.Appointments.FirstOrDefault().CustomerEmail)</th>
+                            <th>@Html.DisplayNameFor(x => x.Appointments.FirstOrDefault().IsConfirmed)</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var appointment in Model.Appointments)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(x => appointment.SalesPerson.Name)</td>
+                                <td>@Html.DisplayFor(x => appointment.AppointmentDay)</td>
+                                <td>@Html.DisplayFor(x => appointment.CustomerName)</td>
+                                <td>@Html.DisplayFor(x => appointment.CustomerPhoneNumber)</td>
+                                <td>@Html.DisplayFor(x => appointment.CustomerEmail)</td>
+                                <td>@Html.DisplayFor(x => appointment.IsConfirmed)</td>
+                                <td>
+                                    <partial name="_TableButtonPartial" model="appointment.Id" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>

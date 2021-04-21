@@ -94,7 +94,8 @@ namespace StoreMVC.Areas.Customer.Controllers
 
             await _db.SaveChangesAsync();
 
-            ShoppingCartVM.Products.Clear();
+            //CRASH
+            ShoppingCartVM.Products?.Clear();
 
             return RedirectToAction(nameof(AppointmentConfirmation), new { Id = appointment.Id});
         }
@@ -117,8 +118,10 @@ namespace StoreMVC.Areas.Customer.Controllers
                 ShoppingCartVM.Products.Add(await _db.Products
                                                      .Include(x => x.ProductType)
                                                      .Include(x => x.SpecialTag)
-                                                     .FirstOrDefaultAsync(x => x.Id == product.Id));
+                                                     .FirstOrDefaultAsync(x => x.Id == product.ProductId));
             }
+            
+            //ShoppingCartVM.Appointment ??= new ();
             // Возвращаем представление вместе с VM
             return View(ShoppingCartVM);
         }

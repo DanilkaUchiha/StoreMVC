@@ -1,11 +1,14 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StoreMVC.Data;
 using StoreMVC.Models;
+using StoreMVC.Utility;
 
 namespace StoreMVC.Areas.Admin.Controllers
 {
+    [Authorize(Roles = SD.SuperAdminEndUser)]
     [Area(nameof(Admin))]
     public class ProductTypesController : Controller
     {

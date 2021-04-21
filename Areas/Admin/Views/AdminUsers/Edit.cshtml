@@ -1,0 +1,49 @@
+﻿@model StoreMVC.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2 class="text-info">Edit Admin user</h2>
+
+<form method="post" asp-action="Edit">
+    <div class="p-4 border rounded">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-group row">
+            <div class="col-form-label col-2">
+                <label asp-for="Name"></label>
+            </div>
+            <div class="col-7">
+                <input class="form-control" asp-for="Name" />
+            </div>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 col-form-label">
+                <label asp-for="Email"></label>
+            </div>
+            <div class="col-7">
+                <input class="form-control" asp-for="Email" disabled />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2 col-form-label">
+                <label asp-for="PhoneNumber"></label>
+            </div>
+            <div class="col-7">
+                <input class="form-control" asp-for="PhoneNumber" />
+            </div>
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+        </div>
+        <br />
+        <div class="form-group">
+            <input type="submit" class="btn btn-success" value="Edit" />
+            <a asp-action="Index" class="btn btn-primary">Back to Admin users</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

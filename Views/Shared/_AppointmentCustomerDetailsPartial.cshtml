@@ -1,5 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model StoreMVC.Models.Appointment
+
+<h3 class="text-success">Appointment Details</h3>
+
+<form>
+    <div class="p-4 border" style="background: #eff8ff">
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="CustomerName"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="CustomerName" disabled />
+            </div>
+            <div class="offset-1"></div>
+            <div class="col-2">
+                <label asp-for="CustomerEmail"></label>
+            </div>
+            <div class="col-3">
+                <input type="email" asp-for="CustomerEmail" disabled />
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="CustomerPhoneNumber"></label>
+            </div>
+            <div class="col-3">
+                <input type="number" asp-for="CustomerPhoneNumber" disabled />
+            </div>
+            <div class="offset-1"></div>
+            <div class="col-2">
+                <label asp-for="AppointmentDay"></label>
+            </div>
+            <div class="col-3">
+                <input type="date" asp-for="AppointmentDay" disabled />
+            </div>
+        </div>
+    </div>
+</form>
+

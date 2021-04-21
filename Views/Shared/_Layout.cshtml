@@ -26,38 +26,53 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Products" asp-action="Index">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="ProductTypes" asp-action="Index">Product types</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="SpecialTags" asp-action="Index">Special tags</a>
-                        </li>
-
-                        @if (httpContextAccessor.HttpContext.Session.Get<List<int>>(SessionKey.ShoppingCart) is not null)
+                        @if (User.IsInRole(SD.SuperAdminEndUser))
                         {
-                            <li>
-                                <a class="nav-link" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    @{
-                                        var count = httpContextAccessor.HttpContext.Session.Get<List<int>>(SessionKey.ShoppingCart).Count;
-                                    }
-                                    (@count)
-                                </a>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Products" asp-action="Index">Products</a>
                             </li>
-                        }
-                        else
-                        {
-                            <li>
-                                <a class="nav-link" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index">
-                                    <i class="fas fa-shopping-cart"></i>
-                                    (0)
-                                </a>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="ProductTypes" asp-action="Index">Product types</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="SpecialTags" asp-action="Index">Special tags</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="AdminUsers" asp-action="Index">Admin users</a>
                             </li>
                         }
 
+                        @if (User.IsInRole(SD.SuperAdminEndUser) || User.IsInRole(SD.AdminEndUser))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Admin" asp-controller="Appointments" asp-action="Index">Appointments</a>
+                            </li>
+                        }
+
+                        @if (!User.IsInRole(SD.SuperAdminEndUser))
+                        {
+                            @if (httpContextAccessor.HttpContext.Session.Get<List<int>>(SessionKey.ShoppingCart) is not null)
+                            {
+                                <li>
+                                    <a class="nav-link" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        @{
+                                            var count = httpContextAccessor.HttpContext.Session.Get<List<int>>(SessionKey.ShoppingCart).Count;
+                                        }
+                                        (@count)
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a class="nav-link" asp-area="Customer" asp-controller="ShoppingCart" asp-action="Index">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        (0)
+                                    </a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
             </div>

@@ -17,5 +17,6 @@ namespace StoreMVC.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<ProductsForAppointment> ProductsForAppointments { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

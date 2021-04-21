@@ -1,1 +1,29 @@
-﻿@model StoreMVC.Models.ViewModels.ShoppingCartViewModel
+﻿@model IEnumerable<Product>
+
+
+<table class="table table-striped">
+    <thead class="table-info">
+    <tr>
+        @* Ограничиваем ширину заголовка таблицы,  ограничивая и содержимое столбца *@
+        <th style="width: 20%"></th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>ShadeColor</th>
+        <th>Product type</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>
+                    <img class="img-fluid" src="@product.Image"/>
+                </td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.ShadeColor</td>
+                <td>@product.ProductType.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>
